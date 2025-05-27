@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston Betz | Video Professional</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --dark-green: #1a2e1a;
+            --medium-green: #2a4a2a;
+            --light-green: #3a6a3a;
+            --gold: #d4af37;
+            --light-gold: #f1e5ac;
+            --light: #f1f1f1;
+            --dark: #121212;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--light-gold);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(26, 46, 26, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--light);
+        }
+        
+        .logo span {
+            color: var(--gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        /* Hero Section with Video Background */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 46, 26, 0.8), rgba(26, 46, 26, 0.4));
+            z-index: -1;
+        }
+        
+        .hero-content {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .title-rotator {
+            display: inline-block;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--light-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* Featured Project Section */
+        .featured-project {
+            padding: 80px 0;
+            background-color: var(--medium-green);
+        }
+        
+        .project-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .project-video {
+            flex: 2;
+            background: var(--dark);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-video iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        
+        .project-client {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .client-logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .client-description {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold);
+        }
+        
+        /* About Section with Animated Skills */
+        .about {
+            padding: 100px 0;
+            background-color: var(--dark-green);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        .skills {
+            margin-top: 30px;
+        }
+        
+        .skill-item {
+            margin-bottom: 25px;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+        }
+        
+        .skill-percent {
+            color: var(--gold);
+        }
+        
+        .skill-bar-container {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--light-gold));
+            border-radius: 5px;
+            position: relative;
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+        
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                            transparent, 
+                            rgba(255, 255, 255, 0.3), 
+                            transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Clients Section */
+        .clients {
+            padding: 80px 0;
+            background-color: var(--medium-green);
+        }
+        
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .client-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .client-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .client-logo-card {
+            max-width: 180px;
+            max-height: 80px;
+            margin: 0 auto 20px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .client-role {
+            color: var(--gold);
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .project-container {
+                flex-direction: column;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Boston<span>Betz</span></div>
+                <ul class="nav-links">
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#clients">Clients</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero">
+        <video autoplay muted loop class="video-background">
+            <source src="https://example.com/your-demo-reel.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Background Fallback">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Boston Betz</h1>
+                <h2>
+                    <span class="title-rotator">Editor</span> • 
+                    <span class="title-rotator">Producer</span> • 
+                    <span class="title-rotator">Cinematographer</span> • 
+                    <span class="title-rotator">Colorist</span>
+                </h2>
+                <a href="#work" class="btn">View My Work</a>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Project Section -->
+    <section id="work" class="featured-project">
+        <div class="container">
+            <div class="project-container">
+                <div class="project-video">
+                    <!-- Replace with your actual project embed -->
+                    <iframe src="https://player.vimeo.com/video/example" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+                <div class="project-client">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Ball_State_University_seal.svg/1200px-Ball_State_University_seal.svg.png" alt="Ball State Public Media" class="client-logo">
+                    <div class="client-description">
+                        <h3>Ball State Public Media</h3>
+                        <p>As a Production Specialist, I created engaging content for PBS broadcasts and digital platforms, handling all aspects from pre-production to final delivery.</p>
+                        <a href="#" class="btn" style="margin: 15px 0 0; padding: 8px 20px; font-size: 0.8rem;">View All Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Multidisciplinary Video Professional</h3>
+                    <p>With extensive experience across all aspects of video production, I bring a comprehensive skill set to every project. My background in both corporate and creative work allows me to adapt to various production needs while maintaining high artistic standards.</p>
+                    <p>Specializing in post-production, I excel at transforming raw footage into compelling narratives through expert editing, color grading, and sound design.</p>
+                    
+                    <div class="skills">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Video Editing</span>
+                                <span class="skill-percent">95%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Color Grading</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Cinematography</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Motion Graphics</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-img">
+                    <img src="https://media.licdn.com/dms/image/D5603AQFJb8v1QY7XbQ/profile-displayphoto-shrink_800_800/0/1684860275763?e=1721260800&v=beta&t=8h2ZgQYwWQH8vGg8z2Q5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q" alt="Boston Betz">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Organizations I've Worked With</h2>
+            </div>
+            
+            <div class="client-grid">
+                <div class="client-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Ball_State_University_seal.svg/1200px-Ball_State_University_seal.svg.png" alt="Ball State Public Media" class="client-logo-card">
+                    <h3>Ball State Public Media</h3>
+                    <p class="client-role">Production Specialist</p>
+                    <p>Created content for PBS broadcasts and digital platforms, handling all production aspects.</p>
+                </div>
+                
+                <div class="client-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Ball_State_University_seal.svg/1200px-Ball_State_University_seal.svg.png" alt="Ball State Marketing" class="client-logo-card">
+                    <h3>Ball State Marketing</h3>
+                    <p class="client-role">Video Producer</p>
+                    <p>Produced marketing content showcasing university programs and student experiences.</p>
+                </div>
+                
+                <div class="client-card">
+                    <img src="https://via.placeholder.com/150x80?text=Blurless+Entertainment" alt="Blurless Entertainment" class="client-logo-card">
+                    <h3>Blurless Entertainment</h3>
+                    <p class="client-role">Cinematographer/Editor</p>
+                    <p>Worked on narrative and commercial projects as both shooter and post-production specialist.</p>
+                </div>
+                
+                <div class="client-card">
+                    <img src="https://via.placeholder.com/150x80?text=Freelance" alt="Freelance" class="client-logo-card">
+                    <h3>Freelance Projects</h3>
+                    <p class="client-role">Various Roles</p>
+                    <p>Collaborated with diverse clients on commercials, music videos, and corporate content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section would go here -->
+
+    <script>
+        // Animate skill bars when scrolled into view
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width;
+            });
+        }
+        
+        // Check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Run animation when skills section is in view
+        window.addEventListener('scroll', function() {
+            const skillsSection = document.querySelector('.skills');
+            if (isInViewport(skillsSection)) {
+                animateSkills();
+                // Remove event listener after animation runs
+                window.removeEventListener('scroll', arguments.callee);
+            }
+        });
+        
+        // Simple title rotator for hero section
+        const titles = ["Editor", "Producer", "Cinematographer", "Colorist"];
+        let currentIndex = 0;
+        const titleElements = document.querySelectorAll('.title-rotator');
+        
+        function rotateTitles() {
+            titleElements.forEach((el, index) => {
+                // Cycle through titles with offset
+                const displayIndex = (currentIndex + index) % titles.length;
+                el.textContent = titles[displayIndex];
+            });
+            currentIndex = (currentIndex + 1) % titles.length;
+        }
+        
+        // Rotate every 3 seconds
+        setInterval(rotateTitles, 3000);
+    </script>
+</body>
+</html>
