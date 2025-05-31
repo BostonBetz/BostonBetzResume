@@ -3,755 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boston Betz | Video Professional</title>
-    <style>
-        /* Global Styles */
-        :root {
-            --rich-green: #004F1E;
-            --gold: #C4AA37;
-            --navy: #23237D;
-            --red: #C94038;
-            --pastel-purple: #8484D9;
-            --pastel-green: #B9EDCD;
-            --light: #F8F8F2;
-            --dark: #121212;
-            --vintage-paper: #F5F0E5;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
-        }
-        
-        body {
-            background-color: var(--rich-green);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="%23C4AA3733" stroke-width="2"/></svg>');
-            background-size: 40px 40px;
-        }
-        
-        @font-face {
-            font-family: 'Cormorant Garamond';
-            src: url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
-        }
-        
-        a {
-            color: var(--gold);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        a:hover {
-            color: var(--pastel-green);
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Vintage decorative elements */
-        .laurel-divider {
-            position: relative;
-            height: 40px;
-            margin: 40px 0;
-            background-image: url('data:image/svg+xml;utf8,<svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><path d="M10,20 Q20,5 30,20 Q40,35 50,20 Q60,5 70,20 Q80,35 90,20 Q100,5 110,20" fill="none" stroke="%23C4AA37" stroke-width="1.5"/></svg>');
-            background-repeat: repeat-x;
-            background-position: center;
-            opacity: 0.7;
-        }
-        
-        .square-border {
-            border: 2px solid var(--gold);
-            position: relative;
-            padding: 3px;
-        }
-        
-        .square-border::before, .square-border::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border: 2px solid var(--gold);
-        }
-        
-        .square-border::before {
-            top: -2px;
-            left: -2px;
-            border-right: none;
-            border-bottom: none;
-        }
-        
-        .square-border::after {
-            bottom: -2px;
-            right: -2px;
-            border-left: none;
-            border-top: none;
-        }
-        
-        /* Header & Navigation */
-        header {
-            background-color: rgba(0, 79, 30, 0.95);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid var(--gold);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: 600;
-            color: var(--light);
-            letter-spacing: 1px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        .logo span {
-            color: var(--gold);
-            font-weight: 700;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-            position: relative;
-        }
-        
-        .nav-links li::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links li:hover::after {
-            width: 100%;
-        }
-        
-        .nav-links a {
-            color: var(--light);
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        
-        /* Hero Section with Video Background */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            overflow: hidden;
-        }
-        
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            opacity: 0.8;
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 79, 30, 0.7), rgba(0, 79, 30, 0.3));
-            z-index: -1;
-        }
-        
-        .hero-content {
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-        }
-        
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        .role-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .role-btn {
-            padding: 12px 25px;
-            background: rgba(196, 170, 55, 0.2);
-            border: 1px solid var(--gold);
-            color: var(--light);
-            font-size: 1rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .role-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(196, 170, 55, 0.4), transparent);
-            transition: all 0.5s ease;
-        }
-        
-        .role-btn:hover {
-            background: rgba(196, 170, 55, 0.3);
-            transform: translateY(-3px);
-        }
-        
-        .role-btn:hover::before {
-            left: 100%;
-        }
-        
-        /* Work Sections */
-        .work-section {
-            padding: 100px 0;
-            background-color: var(--rich-green);
-            position: relative;
-        }
-        
-        .work-section:nth-child(even) {
-            background-color: rgba(0, 79, 30, 0.9);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2.8rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 2px;
-            background: var(--gold);
-        }
-        
-        .project-container {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .project-video {
-            flex: 2;
-            background: var(--dark);
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .project-video iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-        }
-        
-        .project-client {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-            background: rgba(35, 35, 125, 0.2);
-            border: 1px solid var(--gold);
-            position: relative;
-        }
-        
-        .client-logo {
-            max-width: 200px;
-            margin-bottom: 20px;
-            filter: brightness(0) invert(1);
-        }
-        
-        .client-description {
-            padding: 15px 0;
-        }
-        
-        .client-description h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: var(--gold);
-        }
-        
-        /* About Section */
-        .about {
-            padding: 120px 0;
-            background-color: var(--rich-green);
-            position: relative;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .about-img {
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        .about-img::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid var(--gold);
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            position: relative;
-            z-index: 0;
-        }
-        
-        .about-text h3 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            color: var(--gold);
-            font-weight: 600;
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        /* Skills */
-        .skills {
-            margin-top: 40px;
-        }
-        
-        .skill-item {
-            margin-bottom: 25px;
-        }
-        
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .skill-name {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        .skill-percent {
-            color: var(--gold);
-        }
-        
-        .skill-bar-container {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .skill-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--pastel-green));
-            border-radius: 4px;
-            position: relative;
-            width: 0;
-            transition: width 1.5s ease-out;
-        }
-        
-        .skill-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                            transparent, 
-                            rgba(255, 255, 255, 0.3), 
-                            transparent);
-            animation: shine 2s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            
-            .project-container {
-                flex-direction: column;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-img {
-                order: -1;
-                max-width: 500px;
-                margin: 0 auto;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .role-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .role-btn {
-                width: 80%;
-            }
-        }
-    </style>
+    <title>Boston Betz | Filmmaker Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="boston-betz.css">
 </head>
 <body>
+    <!-- Background Elements -->
+    <div class="carbon-fiber"></div>
+    <div class="crystal-bg">
+        <div class="crystal-shape shape-1"></div>
+        <div class="crystal-shape shape-2"></div>
+        <div class="crystal-shape shape-3"></div>
+        <div class="crystal-shape shape-4"></div>
+    </div>
+    
     <!-- Header -->
     <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">Boston<span>Betz</span></a>
-                <ul class="nav-links">
-                    <li><a href="#work">Work</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+        <div class="logo">BOSTON BETZ</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="crystal-btn">Projects</a></li>
+                <li><a href="#" class="crystal-btn">Showreel</a></li>
+                <li><a href="#" class="crystal-btn">About</a></li>
+                <li><a href="#" class="crystal-btn">Contact</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <!-- Hero Section with Video Background -->
+    
+    <!-- Hero Section -->
     <section class="hero">
-        <video autoplay muted loop class="video-background">
-            <source src="demoshort.mp4" type="video/mp4">
-            <!-- Fallback image if video doesn't load -->
-            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Background Fallback">
+        <h1>BOSTON BETZ</h1>
+        <h2>CINEMATOGRAPHER & FILMMAKER</h2>
+        <p>Transforming visions into cinematic experiences through expert cinematography, producing, and post-production. Bringing stories to life with technical precision and creative passion.</p>
+        
+        <div class="roles-container">
+            <a href="#" class="crystal-btn role-btn">PRODUCING</a>
+            <a href="#" class="crystal-btn role-btn">CINEMATOGRAPHY</a>
+            <a href="#" class="crystal-btn role-btn">EDITING</a>
+            <a href="#" class="crystal-btn role-btn">DIT</a>
+        </div>
+    </section>
+    
+    <!-- Video Section -->
+    <div class="video-container">
+        <video autoplay muted loop>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-cinematic-film-reel-3647-large.mp4" type="video/mp4">
         </video>
-        <div class="video-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1>Boston Betz</h1>
-                <div class="laurel-divider"></div>
-                <div class="role-buttons">
-                    <a href="producing.html" class="role-btn">Producing</a>
-                    <a href="cinematography.html" class="role-btn">Cinematography</a>
-                    <a href="editing.html" class="role-btn">Editing</a>
-                    <a href="dit.html" class="role-btn">Digital Imaging</a>
-                </div>
+        <div class="video-overlay">
+            <div class="video-content">
+                <h3 class="project-title">DEMO REEL 2023</h3>
+                <p class="project-desc">A showcase of my best cinematic moments from the past year, featuring diverse projects and creative approaches to visual storytelling.</p>
             </div>
         </div>
-    </section>
-
-    <!-- Radiance Cinema Work Section -->
-    <section id="work" class="work-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Radiance Cinema</h2>
-            </div>
-            <div class="project-container">
-                <div class="project-video">
-                    <!-- Replace with your actual project embed -->
-                    <iframe src="https://player.vimeo.com/video/example" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-                <div class="project-client">
-                    <img src="https://via.placeholder.com/200x80?text=Radiance+Cinema" alt="Radiance Cinema" class="client-logo">
-                    <div class="client-description">
-                        <h3>Radiance Cinema</h3>
-                        <p>Highlighted project description showcasing your work with Radiance Cinema. Include key details about your role and the project's significance.</p>
-                        <a href="radiance-cinema.html" class="role-btn" style="margin-top: 20px; display: inline-block;">View All Radiance Projects</a>
+    </div>
+    
+    <!-- Showcase Section -->
+    <section class="showcase">
+        <h2 class="showcase-title">FEATURED WORK & COLLABORATIONS</h2>
+        
+        <div class="showcase-grid">
+            <!-- Item 1 - Blurless Entertainment -->
+            <div class="showcase-item">
+                <a href="blurless-entertainment.html" class="project-highlight">
+                    <div class="project-overlay">
+                        <h3>CORNERSTONE OF CINEMA EVENT</h3>
+                        <p>Producer & Director | Creating unforgettable cinematic experiences</p>
                     </div>
+                </a>
+                <div class="org-box">
+                    <div class="org-logo">BE</div>
+                    <h3 class="org-title">BLURLESS ENTERTAINMENT</h3>
+                    <p class="org-desc">An innovative production company focused on creating boundary-pushing cinematic experiences. I've collaborated with them on multiple projects as both producer and director.</p>
+                    <a href="#" class="crystal-btn">VIEW PROJECTS</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Ball State Public Media Work Section -->
-    <section class="work-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Ball State Public Media</h2>
-            </div>
-            <div class="project-container">
-                <div class="project-video">
-                    <iframe src="https://player.vimeo.com/video/example" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-                <div class="project-client">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Ball_State_University_seal.svg/1200px-Ball_State_University_seal.svg.png" alt="Ball State Public Media" class="client-logo">
-                    <div class="client-description">
-                        <h3>Ball State Public Media</h3>
-                        <p>As a Production Specialist, I created engaging content for PBS broadcasts and digital platforms, handling all aspects from pre-production to final delivery.</p>
-                        <a href="ball-state-public.html" class="role-btn" style="margin-top: 20px; display: inline-block;">View All BSPM Projects</a>
+            
+            <!-- Item 2 - Radiance Cinema -->
+            <div class="showcase-item">
+                <a href="radiance-cinema.html" class="project-highlight">
+                    <div class="project-overlay">
+                        <h3>SIZZLE</h3>
+                        <p>Cinematographer | Capturing culinary artistry through innovative lighting</p>
                     </div>
+                </a>
+                <div class="org-box">
+                    <div class="org-logo">RC</div>
+                    <h3 class="org-title">RADIANCE CINEMA</h3>
+                    <p class="org-desc">A boutique film production house specializing in visually stunning short films. Known for their artistic approach and attention to visual storytelling.</p>
+                    <a href="#" class="crystal-btn">VIEW PROJECTS</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Ball State Marketing Work Section -->
-    <section class="work-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Ball State Marketing</h2>
-            </div>
-            <div class="project-container">
-                <div class="project-video">
-                    <iframe src="https://player.vimeo.com/video/example" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-                <div class="project-client">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Ball_State_University_seal.svg/1200px-Ball_State_University_seal.svg.png" alt="Ball State Marketing" class="client-logo">
-                    <div class="client-description">
-                        <h3>Ball State Marketing</h3>
-                        <p>Produced marketing content showcasing university programs and student experiences through compelling visual storytelling.</p>
-                        <a href="ball-state-marketing.html" class="role-btn" style="margin-top: 20px; display: inline-block;">View All Marketing Projects</a>
+            
+            <!-- Item 3 - Ball State Public Media -->
+            <div class="showcase-item">
+                <a href="ball-state-public.html" class="project-highlight">
+                    <div class="project-overlay">
+                        <h3>THIS IS CAMPAIGN</h3>
+                        <p>Social Media Editor | Creating compelling visual narratives for digital platforms</p>
                     </div>
+                </a>
+                <div class="org-box">
+                    <div class="org-logo">BSP</div>
+                    <h3 class="org-title">BALL STATE PUBLIC MEDIA</h3>
+                    <p class="org-desc">The university's media production arm, creating content that showcases campus life and academic excellence to a wide audience.</p>
+                    <a href="#" class="crystal-btn">VIEW PROJECTS</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Blurless Entertainment Work Section -->
-    <section class="work-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Blurless Entertainment</h2>
-            </div>
-            <div class="project-container">
-                <div class="project-video">
-                    <iframe src="https://player.vimeo.com/video/example" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-                <div class="project-client">
-                    <img src="https://via.placeholder.com/200x80?text=Blurless+Entertainment" alt="Blurless Entertainment" class="client-logo">
-                    <div class="client-description">
-                        <h3>Blurless Entertainment</h3>
-                        <p>Worked on narrative and commercial projects as both cinematographer and post-production specialist, contributing to the visual storytelling process.</p>
-                        <a href="blurless.html" class="role-btn" style="margin-top: 20px; display: inline-block;">View All Blurless Projects</a>
+            
+            <!-- Item 4 - Ball State Marketing -->
+            <div class="showcase-item">
+                <a href="ball-state-marketing.html" class="project-highlight">
+                    <div class="project-overlay">
+                        <h3>DAY IN THE LIFE</h3>
+                        <p>Creator | Showcasing campus life through authentic storytelling</p>
                     </div>
+                </a>
+                <div class="org-box">
+                    <div class="org-logo">BSM</div>
+                    <h3 class="org-title">BALL STATE MARKETING</h3>
+                    <p class="org-desc">The official marketing department of Ball State University, responsible for promoting the university's brand and student experience.</p>
+                    <a href="#" class="crystal-btn">VIEW PROJECTS</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Freelance Work Section -->
-    <section class="work-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Freelance Projects</h2>
-            </div>
-            <div class="project-container">
-                <div class="project-video">
-                    <iframe src="https://player.vimeo.com/video/example" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
-                <div class="project-client">
-                    <img src="https://via.placeholder.com/200x80?text=Freelance+Work" alt="Freelance Projects" class="client-logo">
-                    <div class="client-description">
-                        <h3>Freelance Work</h3>
-                        <p>Collaborated with diverse clients on commercials, music videos, and corporate content, bringing professional production values to independent projects.</p>
-                        <a href="freelance.html" class="role-btn" style="margin-top: 20px; display: inline-block;">View All Freelance Projects</a>
+            
+            <!-- Item 5 - Freelancing -->
+            <div class="showcase-item">
+                <a href="freelancing.html" class="project-highlight">
+                    <div class="project-overlay">
+                        <h3>GATHERED 'ROUND THE FIRE</h3>
+                        <p>Editor & Producer | Documentary on community storytelling traditions</p>
                     </div>
+                </a>
+                <div class="org-box">
+                    <div class="org-logo">FP</div>
+                    <h3 class="org-title">FREELANCING PROJECTS</h3>
+                    <p class="org-desc">A collection of independent projects where I've taken on multiple roles to bring unique stories to life outside of organizational collaborations.</p>
+                    <a href="#" class="crystal-btn">VIEW PROJECTS</a>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Multidisciplinary Video Professional</h3>
-                    <p>With extensive experience across all aspects of video production, I bring a comprehensive skill set to every project. My background in both corporate and creative work allows me to adapt to various production needs while maintaining high artistic standards.</p>
-                    <p>Specializing in post-production, I excel at transforming raw footage into compelling narratives through expert editing, color grading, and sound design. My technical expertise as a DIT ensures optimal image quality throughout the production pipeline.</p>
-                    
-                    <div class="skills">
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Video Editing</span>
-                                <span class="skill-percent">95%</span>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="95%"></div>
-                            </div>
+    <section class="about">
+        <div class="about-content">
+            <h2>ABOUT ME</h2>
+            <p>I'm a passionate filmmaker with a focus on visual storytelling that resonates emotionally and intellectually. With a background in both technical cinematography and creative direction, I approach each project as a unique opportunity to craft compelling narratives.</p>
+            <p>My journey in film began at Ball State University, where I honed my skills across all aspects of production. I believe in the power of collaboration and the magic that happens when talented individuals come together to create something greater than the sum of its parts.</p>
+            <p>When I'm not on set or in the editing suite, you'll find me exploring new camera techniques, studying classic cinema, or hiking in nature to recharge my creative energy.</p>
+            
+            <div class="crystal-insight">
+                <div class="crystal-insight-inner">
+                    <div class="crystal-insight-front">
+                        <div class="crystal-icon">
+                            <i class="fas fa-crystal"></i>
                         </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Color Grading</span>
-                                <span class="skill-percent">90%</span>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="90%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">Cinematography</span>
-                                <span class="skill-percent">85%</span>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="85%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <div class="skill-info">
-                                <span class="skill-name">DIT Workflow</span>
-                                <span class="skill-percent">88%</span>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="88%"></div>
-                            </div>
-                        </div>
+                        <h3>FILMMAKING PHILOSOPHY</h3>
+                        <p>Click to reveal my creative approach</p>
                     </div>
+                    <div class="crystal-insight-back">
+                        <h3>CREATIVE ALCHEMY</h3>
+                        <p>"I see filmmaking as crystallizing moments - capturing light, emotion, and story in a multifaceted gem. Each project is a unique crystal formation, with its own facets reflecting different perspectives and emotions."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-item"></div>
+                <div class="carousel-item"></div>
+                <div class="carousel-item"></div>
+                <div class="carousel-item"></div>
+            </div>
+            
+            <div class="carousel-nav">
+                <div class="carousel-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="carousel-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <div class="carousel-dot active" data-index="0"></div>
+                <div class="carousel-dot" data-index="1"></div>
+                <div class="carousel-dot" data-index="2"></div>
+                <div class="carousel-dot" data-index="3"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>LET'S CREATE TOGETHER</h2>
+        <p>Have a project in mind? Interested in collaboration? I'm always open to discussing new opportunities and creative ventures.</p>
+        <a href="#" class="crystal-btn" id="contactBtn">GET IN CONTACT</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-vimeo-v"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2023 BOSTON BETZ FILMS. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>GET IN TOUCH</h3>
+            <form action="https://formsubmit.co/your@email.com" method="POST">
+                <input type="hidden" name="_subject" value="New Contact from Portfolio">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 
-                <div class="about-img">
-                    <img src="https://media.licdn.com/dms/image/D5603AQFJb8v1QY7XbQ/profile-displayphoto-shrink_800_800/0/1684860275763?e=1721260800&v=beta&t=8h2ZgQYwWQH8vGg8z2Q5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q5Q" alt="Boston Betz">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label for="reason">Reason for Inquiry</label>
+                    <select id="reason" name="reason" required>
+                        <option value="">Select a reason</option>
+                        <option value="project">Project Inquiry</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="employment">Employment Opportunity</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="crystal-btn">SEND MESSAGE</button>
+            </form>
         </div>
-    </section>
-
+    </div>
+    
     <script>
-        // Animate skill bars when scrolled into view
-        function animateSkills() {
-            const skillBars = document.querySelectorAll('.skill-bar');
-            skillBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
-                bar.style.width = width;
-            });
-        }
+        // Modal functionality
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeModal = document.getElementById('closeModal');
         
-        // Check if element is in viewport
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.bottom >= 0
-            );
-        }
+        contactBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
         
-        // Run animation when skills section is in view
-        window.addEventListener('scroll', function() {
-            const skillsSection = document.querySelector('.skills');
-            if (isInViewport(skillsSection)) {
-                animateSkills();
-                // Remove event listener after animation runs
-                window.removeEventListener('scroll', arguments.callee);
+        closeModal.addEventListener('click', () => {
+            contactModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
         
-        // Add square borders to all elements with the class
-        document.addEventListener('DOMContentLoaded', function() {
-            const squareBorders = document.querySelectorAll('.square-border');
-            squareBorders.forEach(border => {
-                const before = document.createElement('div');
-                before.style.position = 'absolute';
-                before.style.top = '-2px';
-                before.style.left = '-2px';
-                before.style.width = '15px';
-                before.style.height = '15px';
-                before.style.border = '2px solid var(--gold)';
-                before.style.borderRight = 'none';
-                before.style.borderBottom = 'none';
+        // Button reflection effect
+        document.querySelectorAll('.crystal-btn').forEach(button => {
+            button.addEventListener('mousemove', e => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
-                const after = document.createElement('div');
-                after.style.position = 'absolute';
-                after.style.bottom = '-2px';
-                after.style.right = '-2px';
-                after.style.width = '15px';
-                after.style.height = '15px';
-                after.style.border = '2px solid var(--gold)';
-                after.style.borderLeft = 'none';
-                after.style.borderTop = 'none';
-                
-                border.appendChild(before);
-                border.appendChild(after);
+                button.style.setProperty('--x', x);
+                button.style.setProperty('--y', y);
             });
         });
+        
+        // Parallax effect for background crystals
+        document.addEventListener('mousemove', e => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.querySelector('.shape-1').style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px) rotate(${x * 360}deg)`;
+            document.querySelector('.shape-2').style.transform = `translate(${x * -15 + 7.5}px, ${y * -15 + 7.5}px) rotate(${x * -360}deg)`;
+            document.querySelector('.shape-3').style.transform = `translate(${x * 8 - 4}px, ${y * 8 - 4}px) rotate(${x * 180}deg)`;
+            document.querySelector('.shape-4').style.transform = `translate(${x * -10 + 5}px, ${y * -10 + 5}px) rotate(${x * -180}deg)`;
+        });
+        
+        // Carousel functionality
+        const carousel = document.getElementById('carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let currentIndex = 0;
+        
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Next button
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % dots.length;
+            updateCarousel();
+        });
+        
+        // Previous button
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + dots.length) % dots.length;
+            updateCarousel();
+        });
+        
+        // Dot navigation
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentIndex = parseInt(dot.getAttribute('data-index'));
+                updateCarousel();
+            });
+        });
+        
+        // Auto-advance carousel
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % dots.length;
+            updateCarousel();
+        }, 5000);
     </script>
+    <script src="boston-betz.js"></script>
 </body>
 </html>
