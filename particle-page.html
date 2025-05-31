@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston Betz | Filmmaker Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --carbon-dark: #0d0d0d;
+            --carbon-light: #1a1a1a;
+            --carbon-fiber: #121212;
+            --silver: #e6e6e6;
+            --platinum: #f0f0f0;
+            --crystal-glow: rgba(255, 255, 255, 0.1);
+            --accent: #ffffff;
+        }
+        
+        body {
+            background-color: var(--carbon-dark);
+            color: var(--silver);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+        
+        /* Carbon Fiber Texture for entire page */
+        .carbon-fiber {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(27deg, var(--carbon-light) 5px, transparent 5px) 0 5px,
+                linear-gradient(207deg, var(--carbon-light) 5px, transparent 5px) 10px 0px,
+                linear-gradient(27deg, var(--carbon-fiber) 5px, transparent 5px) 0px 10px,
+                linear-gradient(207deg, var(--carbon-fiber) 5px, transparent 5px) 10px 5px,
+                linear-gradient(90deg, var(--carbon-light) 10px, transparent 10px),
+                linear-gradient(var(--carbon-fiber) 25%, var(--carbon-light) 25%, var(--carbon-light) 50%, transparent 50%, transparent 75%, var(--carbon-light) 75%, var(--carbon-light));
+            background-size: 20px 20px;
+            background-color: var(--carbon-dark);
+            z-index: -3;
+            opacity: 0.9;
+        }
+        
+        /* Crystal Background Elements - now for entire page */
+        .crystal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            opacity: 0.8;
+        }
+        
+        .crystal-shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.02);
+            animation-duration: 35s; /* Faster animation */
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            filter: blur(0.5px);
+            box-shadow: 
+                inset 0 0 20px rgba(255, 255, 255, 0.05),
+                0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .shape-1 {
+            width: 420px; /* Larger */
+            height: 420px; /* Larger */
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            top: 10%;
+            left: 5%;
+            animation-name: rotate-cw;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .shape-2 {
+            width: 580px; /* Larger */
+            height: 580px; /* Larger */
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+            top: 30%;
+            right: -100px;
+            animation-name: rotate-ccw;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        
+        .shape-3 {
+            width: 320px; /* Larger */
+            height: 320px; /* Larger */
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            bottom: 20%;
+            left: 25%;
+            animation-name: rotate-cw;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        
+        .shape-4 {
+            width: 480px; /* Larger */
+            height: 480px; /* Larger */
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            bottom: 10%;
+            right: 10%;
+            animation-name: rotate-ccw;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        
+        @keyframes rotate-cw {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes rotate-ccw {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        
+        /* Header & Navigation */
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(18, 18, 18, 0.85);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(100, 100, 100, 0.1);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--platinum);
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--platinum), transparent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        /* Fixed Crystal Buttons */
+        .crystal-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--platinum);
+            box-shadow: 
+                0 0 15px rgba(0, 0, 0, 0.6),
+                inset 0 0 10px rgba(255, 255, 255, 0.05);
+            clip-path: polygon(90% 0, 100% 30%, 100% 70%, 90% 100%, 10% 100%, 0 70%, 0 30%, 10% 0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(0);
+            border: 1px solid rgba(100, 100, 100, 0.2);
+        }
+        
+        .crystal-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            /* Fixed gradient with smooth transition */
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0.4) 0%, 
+                rgba(255, 255, 255, 0.2) 30%,
+                rgba(255, 255, 255, 0) 70%);
+            transform: translate(calc(var(--x) * 1px), calc(var(--y) * 1px));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .crystal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 5px 25px rgba(0, 0, 0, 0.8),
+                inset 0 0 15px rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+        }
+        
+        .crystal-btn:hover::before {
+            opacity: 1;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 15vh 5% 20vh;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            color: var(--platinum);
+            letter-spacing: 1px;
+            line-height: 1.2;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero h1 span {
+            display: block;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            color: rgba(230, 230, 230, 0.7);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            color: rgba(230, 230, 230, 0.8);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 8rem 5%;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            position: relative;
+            border-top: 1px solid rgba(100, 100, 100, 0.1);
+            border-bottom: 1px solid rgba(100, 100, 100, 0.1);
+            min-height: 100vh;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--platinum);
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--platinum), transparent);
+            margin: 1.5rem auto;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background: rgba(26, 26, 26, 0.7);
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            clip-path: polygon(90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%, 10% 0);
+            border: 1px solid rgba(100, 100, 100, 0.1);
+            box-shadow: 
+                inset 0 0 20px rgba(0, 0, 0, 0.5),
+                0 10px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 
+                inset 0 0 30px rgba(0, 0, 0, 0.7),
+                0 15px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(200, 200, 200, 0.1);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #1a1a1a, #262626);
+            margin-bottom: 1.8rem;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%, 10% 0);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .project-img::before {
+            content: 'FILM STILL';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(200, 200, 200, 0.3);
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--platinum);
+            font-weight: 600;
+        }
+        
+        .project-desc {
+            color: rgba(200, 200, 200, 0.8);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+        
+        /* Interactive Crystal Effect */
+        .crystal-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 6rem 5% 4rem;
+            background: rgba(10, 10, 10, 0.9);
+            color: var(--silver);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--platinum);
+            font-weight: 600;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: rgba(200, 200, 200, 0.7);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            color: var(--platinum);
+            font-size: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 100, 100, 0.2);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.7),
+                inset 0 0 15px rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 100, 100, 0.2);
+            color: rgba(200, 200, 200, 0.5);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            nav ul {
+                gap: 0.8rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Carbon Fiber Background for entire page -->
+    <div class="carbon-fiber"></div>
+    
+    <!-- Crystal Background Shapes for entire page -->
+    <div class="crystal-bg">
+        <div class="crystal-shape shape-1"></div>
+        <div class="crystal-shape shape-2"></div>
+        <div class="crystal-shape shape-3"></div>
+        <div class="crystal-shape shape-4"></div>
+    </div>
+    
+    <!-- Interactive Crystal Canvas -->
+    <canvas id="crystalCanvas" class="crystal-canvas"></canvas>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">BOSTON BETZ</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="crystal-btn">Projects</a></li>
+                <li><a href="#" class="crystal-btn">Showreel</a></li>
+                <li><a href="#" class="crystal-btn">About</a></li>
+                <li><a href="#" class="crystal-btn">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section with new background -->
+    <section class="hero">
+        <h1>VISUAL ALCHEMY<br><span>CINEMATOGRAPHER & FILMMAKER</span></h1>
+        <p>Transforming light and shadow into cinematic narratives. My portfolio showcases the precision-cut facets of visual storytelling, each project a carefully crafted gem in the dark expanse of modern filmmaking.</p>
+        <a href="#" class="crystal-btn">Explore My Work</a>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <h2 class="section-title">FEATURED PRODUCTIONS</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img"></div>
+                <h3 class="project-title">NEON NOIR</h3>
+                <p class="project-desc">A cyberpunk thriller exploring identity in a digitized world. Shot with custom anamorphic lenses for a truly immersive visual experience.</p>
+                <a href="#" class="crystal-btn">VIEW CASE STUDY</a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img"></div>
+                <h3 class="project-title">ARCTIC SILENCE</h3>
+                <p class="project-desc">Documentary capturing the raw beauty of polar landscapes and the communities that thrive in Earth's most extreme environments.</p>
+                <a href="#" class="crystal-btn">VIEW CASE STUDY</a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img"></div>
+                <h3 class="project-title">CHRONO SHIFT</h3>
+                <p class="project-desc">Sci-fi short featuring innovative temporal effects achieved through practical in-camera techniques and minimal CGI.</p>
+                <a href="#" class="crystal-btn">VIEW CASE STUDY</a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img"></div>
+                <h3 class="project-title">URBAN ECHOES</h3>
+                <p class="project-desc">Experimental urban documentary that captures the heartbeat of the city through its architecture and inhabitants.</p>
+                <a href="#" class="crystal-btn">VIEW CASE STUDY</a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img"></div>
+                <h3 class="project-title">VERTIGO DREAMS</h3>
+                <p class="project-desc">Psychological thriller that plays with perspective and perception through innovative camera techniques.</p>
+                <a href="#" class="crystal-btn">VIEW CASE STUDY</a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-img"></div>
+                <h3 class="project-title">MONOCHROME MEMORIES</h3>
+                <p class="project-desc">Personal exploration of memory and loss captured in stark black and white cinematography.</p>
+                <a href="#" class="crystal-btn">VIEW CASE STUDY</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3 class="contact-title">LET'S CREATE TOGETHER</h3>
+            <p class="contact-subtitle">I'm currently available for select directorial and cinematography projects. Let's create something extraordinary together.</p>
+            <a href="#" class="crystal-btn">GET IN TOUCH</a>
+            
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-vimeo-v"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-imdb"></i></a>
+            </div>
+            
+            <div class="copyright">
+                © 2023 BOSTON BETZ FILMS. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mouse tracking for button reflection effect
+        document.querySelectorAll('.crystal-btn').forEach(button => {
+            button.addEventListener('mousemove', e => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                button.style.setProperty('--x', x);
+                button.style.setProperty('--y', y);
+            });
+        });
+        
+        // Parallax effect for background crystals
+        document.addEventListener('mousemove', e => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.querySelector('.shape-1').style.transform = `translate(${x * 10 - 5}px, ${y * 10 - 5}px) rotate(${x * 360}deg)`;
+            document.querySelector('.shape-2').style.transform = `translate(${x * -15 + 7.5}px, ${y * -15 + 7.5}px) rotate(${x * -360}deg)`;
+            document.querySelector('.shape-3').style.transform = `translate(${x * 8 - 4}px, ${y * 8 - 4}px) rotate(${x * 180}deg)`;
+            document.querySelector('.shape-4').style.transform = `translate(${x * -10 + 5}px, ${y * -10 + 5}px) rotate(${x * -180}deg)`;
+        });
+        
+        // Interactive Crystal Particle Effect
+        const canvas = document.getElementById('crystalCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Create particles
+        const particles = [];
+        const particleCount = 150;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.05})`;
+                this.angle = 0;
+                this.spin = Math.random() * 0.05 - 0.025;
+                this.shape = Math.floor(Math.random() * 3);
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.angle += this.spin;
+                
+                // Keep particles within canvas
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.fillStyle = this.color;
+                
+                // Draw different crystal-like shapes
+                switch(this.shape) {
+                    case 0:
+                        // Hexagon
+                        ctx.beginPath();
+                        for (let i = 0; i < 6; i++) {
+                            const angle = (Math.PI / 3) * i;
+                            ctx.lineTo(Math.cos(angle) * this.size * 2, Math.sin(angle) * this.size * 2);
+                        }
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                    case 1:
+                        // Diamond
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size * 2);
+                        ctx.lineTo(this.size * 2, 0);
+                        ctx.lineTo(0, this.size * 2);
+                        ctx.lineTo(-this.size * 2, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                    case 2:
+                        // Triangle
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size * 2);
+                        ctx.lineTo(this.size * 2, this.size * 2);
+                        ctx.lineTo(-this.size * 2, this.size * 2);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+        
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Mouse interaction
+        let mouseX = 0;
+        let mouseY = 0;
+        let mouseRadius = 100;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.x;
+            mouseY = e.y;
+        });
+        
+        // Apply mouse effect to particles
+        function interactWithParticles() {
+            particles.forEach(particle => {
+                const dx = mouseX - particle.x;
+                const dy = mouseY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouseRadius) {
+                    const force = (mouseRadius - distance) / mouseRadius;
+                    const angle = Math.atan2(dy, dx);
+                    const moveX = Math.cos(angle) * force * 5;
+                    const moveY = Math.sin(angle) * force * 5;
+                    
+                    particle.x -= moveX;
+                    particle.y -= moveY;
+                }
+            });
+            
+            requestAnimationFrame(interactWithParticles);
+        }
+        
+        interactWithParticles();
+    </script>
+</body>
+</html>
